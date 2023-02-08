@@ -1,1 +1,1 @@
-# vue-easeing-editor
+# vue-easing-editor
