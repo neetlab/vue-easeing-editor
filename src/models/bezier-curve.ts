@@ -1,4 +1,5 @@
 import BezierEasing from "bezier-easing";
+
 import { range } from "../utils/range";
 
 export type Vector = {
@@ -52,7 +53,30 @@ export const toStylesheet = (controlPoints: ControlPoints) =>
     controlPoints.v1.y.toPrecision(2),
     controlPoints.v2.x.toPrecision(2),
     controlPoints.v2.y.toPrecision(2),
-  ].join(" ")})`;
+  ].join(", ")})`;
+
+export const fromStylesheet = (stylesheet: string): ControlPoints => {
+  const match = stylesheet.match(/^cubic-bezier\((.+?)\)$/);
+  if (match == undefined) {
+    throw new TypeError(`Invalid string was given: ${stylesheet}`);
+  }
+
+  const array = match[1].split(", ");
+  if (array.length < 4) {
+    throw new TypeError(`Not enough arguments: ${stylesheet}`);
+  }
+
+  return {
+    v1: {
+      x: Number(array[0]),
+      y: Number(array[1]),
+    },
+    v2: {
+      x: Number(array[2]),
+      y: Number(array[3]),
+    },
+  };
+};
 
 export const createSequence = (p: ControlPoints, count = 20) => {
   const timingFunction = BezierEasing(

@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { computed } from "vue";
+
+import { useSize } from "./size";
 import { useControlPointCoords } from "./useControlPointCoords";
-import { useSize } from "./context";
 
 const size = useSize();
 const points = useControlPointCoords();

@@ -1,5 +1,6 @@
-import EditorTimelapse from "./EditorTimelapse.vue";
 import { Meta, StoryObj } from "@storybook/vue3";
+
+import EditorTimelapse from "./EditorTimelapse.vue";
 
 export default {
   component: EditorTimelapse,
@@ -11,10 +12,6 @@ export default {
 
 type Story = StoryObj<typeof EditorTimelapse>;
 
-const linear = (t: number) => t;
-
 export const Default: Story = {
-  args: {
-    timingFn: linear,
-  },
+  args: {},
 };

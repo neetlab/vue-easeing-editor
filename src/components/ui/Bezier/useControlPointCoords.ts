@@ -1,7 +1,8 @@
 import { computed, ComputedRef } from "vue";
+
 import { ControlPointsCoords, toCoords } from "../../../models/bezier-curve";
-import { useControlPoints } from "../context";
-import { useSize } from "./context";
+import { useControlPoints } from "../control-points";
+import { useSize } from "./size";
 
 export const useControlPointCoords = (): ComputedRef<ControlPointsCoords> => {
   const size = useSize();

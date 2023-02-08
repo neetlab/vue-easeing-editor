@@ -23,6 +23,7 @@ module.exports = {
     "@vue/eslint-config-typescript/recommended",
     "@vue/eslint-config-prettier",
   ],
+  plugins: ["simple-import-sort"],
   overrides: [
     {
       files: ["**/*.vue"],
@@ -63,6 +64,8 @@ module.exports = {
   ],
   rules: {
     "unicorn/filename-case": "off",
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error",
     "@typescript-eslint/no-unused-vars": [
       "error",
       {

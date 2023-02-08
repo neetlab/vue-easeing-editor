@@ -1,13 +1,12 @@
 <script setup lang="ts">
-import { ref } from "vue";
-
-import EditorBezierForeground from "./EditorBezierForeground.vue";
-import EditorBezierBackground from "./EditorBezierBackground.vue";
-import EditorBezierOverlay from "./EditorBezierOverlay.vue";
+import { ref, toRef } from "vue";
 
 import { ControlPoints, fromCoords } from "../../../models/bezier-curve";
-import { provideSize } from "./context";
-import { useControlPoints } from "../context";
+import { useControlPoints } from "../control-points";
+import EditorBezierBackground from "./EditorBezierBackground.vue";
+import EditorBezierForeground from "./EditorBezierForeground.vue";
+import EditorBezierOverlay from "./EditorBezierOverlay.vue";
+import { provideSize } from "./size";
 
 export type EditorBezierProps = {
   readonly size?: number;
@@ -15,7 +14,7 @@ export type EditorBezierProps = {
 
 export type EditorBezierEmits = {
   (event: "move", data: ControlPoints): void;
-  (event: "change", data: ControlPoints): void;
+  (event: "moveEnd", data: ControlPoints): void;
 };
 
 const controlPoints = useControlPoints();
@@ -66,12 +65,12 @@ const handleMouseDown = (event: MouseEvent) => {
 
 const handleMouseUp = (_: MouseEvent) => {
   isDown.value = false;
-  emit("change", controlPoints);
+  emit("moveEnd", controlPoints);
 };
 
 const handleMouseLeave = () => {
   isDown.value = false;
-  emit("change", controlPoints);
+  emit("moveEnd", controlPoints);
 };
 
 const handleMove = (event: MouseEvent) => {
@@ -79,12 +78,12 @@ const handleMove = (event: MouseEvent) => {
   moveByMouseEvent(event);
 };
 
-provideSize(ref(props.size));
+provideSize(toRef(props, "size"));
 </script>
 
 <template>
   <svg
-    class="overflow-visible"
+    class="overflow-visible cursor-pointer"
     xmlns="http://www.w3.org/2000/svg"
     :width="size"
     :height="size"

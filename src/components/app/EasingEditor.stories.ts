@@ -1,5 +1,6 @@
-import EasingEditor from "./EasingEditor.vue";
 import { Meta, StoryObj } from "@storybook/vue3";
+
+import EasingEditor from "./EasingEditor.vue";
 
 export default {
   component: EasingEditor,

@@ -1,4 +1,5 @@
 import { DeepReadonly, inject, provide, readonly } from "vue";
+
 import { ControlPoints } from "../../models/bezier-curve";
 
 const symbol = Symbol();

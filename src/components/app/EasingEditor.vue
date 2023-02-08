@@ -1,45 +1,69 @@
 <script setup lang="ts">
-import { reactive } from "vue";
+import { reactive, ref, watch } from "vue";
 
-import { ControlPoints } from "../../models/bezier-curve";
+import {
+  ControlPoints,
+  fromStylesheet,
+  toStylesheet,
+} from "../../models/bezier-curve";
+import { PRESETS } from "../../models/preset";
 import EditorBezier from "../ui/Bezier/EditorBezier.vue";
 import EditorCode from "../ui/Code/EditorCode.vue";
-import { provideControlPoints } from "../ui/context";
+import { provideControlPoints } from "../ui/control-points";
 import EditorPresets from "../ui/Presets/EditorPresets.vue";
-import { PRESETS } from "../../models/preset";
 import EditorTimelapse from "../ui/Timelapse/EditorTimelapse.vue";
 
-const controlPoints = reactive<ControlPoints>({
-  v1: {
-    x: 0,
-    y: 0,
-  },
-  v2: {
-    x: 1,
-    y: 1,
-  },
+export type EasingEditorProps = {
+  readonly modelValue: string;
+};
+
+export type EasingEditorEmits = {
+  (event: "update:modelValue", value: string): void;
+};
+
+const props = withDefaults(defineProps<EasingEditorProps>(), {
+  modelValue: "cubic-bezier(0, 0, 1, 1)",
 });
+const emit = defineEmits<EasingEditorEmits>();
+
+const controlPoints = reactive<ControlPoints>(fromStylesheet(props.modelValue));
+const tick = ref(0);
 
 const handleMove = (event: ControlPoints) => {
   controlPoints.v1 = event.v1;
   controlPoints.v2 = event.v2;
 };
 
+const handleMoveEnd = () => {
+  tick.value += 1;
+};
+
+const handleChangePreset = (event: ControlPoints) => {
+  controlPoints.v1 = event.v1;
+  controlPoints.v2 = event.v2;
+  tick.value += 1;
+};
+
+watch(tick, () => {
+  emit("update:modelValue", toStylesheet(controlPoints));
+});
+
 provideControlPoints(controlPoints);
 </script>
 
 <template>
-  <div class="w-min">
-    <EditorTimelapse />
+  <div class="w-min border border-gray-200 shadow rounded p-4">
+    <EditorTimelapse :tick="tick" />
 
-    <div class="flex">
-      <EditorPresets :presets="PRESETS" @change="handleMove" />
+    <div class="flex gap-7" :style="{ marginTop: '26px' }">
+      <EditorPresets :presets="PRESETS" @change="handleChangePreset" />
 
-      <div>
+      <div class="py-7 px-3">
         <EditorBezier
-          :size="150"
+          :size="136"
           :control-points="controlPoints"
           @move="handleMove"
+          @move-end="handleMoveEnd"
         />
       </div>
     </div>

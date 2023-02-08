@@ -8,7 +8,7 @@ export type EditorPresetsProps = {
 };
 
 const props = withDefaults(defineProps<EditorPresetsProps>(), {
-  presets: () => [],
+  presets: () => [] as Preset[],
 });
 
 const emit = defineEmits<{
@@ -21,11 +21,12 @@ const handleChange = (preset: Preset) => {
 </script>
 
 <template>
-  <div class="space-y-2">
+  <div class="space-y-[15px]">
     <EditorPresetItem
       v-for="preset in props.presets"
       :label="preset.id"
       :key="preset.id"
+      :icon="preset.icon"
       @click="handleChange(preset)"
     />
   </div>

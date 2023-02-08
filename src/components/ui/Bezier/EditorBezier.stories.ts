@@ -1,5 +1,6 @@
-import EditorBezier from "./EditorBezier.vue";
 import { Meta, StoryObj } from "@storybook/vue3";
+
+import EditorBezier from "./EditorBezier.vue";
 
 export default {
   component: EditorBezier,

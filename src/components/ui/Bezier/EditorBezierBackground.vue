@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { useSize } from "./context";
+import { useSize } from "./size";
 
 const size = useSize();
 </script>
 
 <template>
-  <path :d="`M 0 ${size} L ${size} 0`" stroke="gray" stroke-width="3" />
+  <path :d="`M 0 ${size} L ${size} 0`" stroke="#DEE1E6" stroke-width="3" />
 </template>

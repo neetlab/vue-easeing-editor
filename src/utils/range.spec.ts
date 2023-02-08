@@ -1,5 +1,6 @@
+import { expect, it } from "vitest";
+
 import { range } from "./range";
-import { it, expect } from "vitest";
 
 it("creates sequence", () => {
   const array = [...range(0, 10)];

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, VNodeRef } from "vue";
+
 import EditorBezierControl from "./EditorBezierControl.vue";
 import { useControlPointCoords } from "./useControlPointCoords";
 
