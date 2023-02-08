@@ -79,7 +79,7 @@ const handleMove = (event: MouseEvent) => {
   moveByMouseEvent(event);
 };
 
-provideSize(props.size);
+provideSize(ref(props.size));
 </script>
 
 <template>

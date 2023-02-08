@@ -1,13 +1,13 @@
-import { inject, provide, ref, Ref } from "vue";
+import { inject, provide, readonly, ref, Ref } from "vue";
 
 const symbol = Symbol();
 
-export const provideSize = (value: number): void => {
-  const size = ref(value);
+export const provideSize = (value: Ref<number>): void => {
+  const size = readonly(value);
   provide(symbol, size);
 };
 
-export const useSize = (): Ref<number> => {
+export const useSize = (): Readonly<Ref<number>> => {
   const size = inject<Ref<number>>(symbol, ref(0));
   return size;
 };
