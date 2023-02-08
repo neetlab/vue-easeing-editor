@@ -7,7 +7,8 @@
     "autodocs",
     "rushstack",
     "tailwindcss",
-    "Timelapse"
+    "Timelapse",
+    "vueuse"
   ],
   "ignoreWords": [],
   "import": []

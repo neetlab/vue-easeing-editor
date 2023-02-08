@@ -6,7 +6,7 @@ export default {
   render: (args) => ({
     components: { EditorBezier },
     setup: () => ({ args }),
-    template: `<editor-bezier :size="args.size" :x1="args.x1" :y1="args.y1" :x2="args.x2" :y2="args.y2" />`,
+    template: `<editor-bezier :size="args.size" :controlPoints="args.controlPoints" />`,
   }),
 } satisfies Meta<typeof EditorBezier>;
 

@@ -1,28 +1,17 @@
-import { inject, provide, ref, Ref } from "vue";
+import { inject, provide } from "vue";
+import { ControlPoints } from "../../models/bezier-curve";
 
 const symbol = Symbol();
 
-type ControlPoints = {
-  readonly x1: number;
-  readonly y1: number;
-  readonly x2: number;
-  readonly y2: number;
-};
-
 export const provideControlPoints = (value: ControlPoints): void => {
-  const controlPoints = ref(value);
-  provide(symbol, controlPoints);
+  provide(symbol, value);
 };
 
-export const useControlPoints = (): Ref<ControlPoints> => {
-  const controlPoints = inject<Ref<ControlPoints>>(
+export const useControlPoints = (): ControlPoints => {
+  const controlPoints = inject<ControlPoints>(
     symbol,
-    ref({
-      x1: 0,
-      y1: 200,
-      x2: 200,
-      y2: 0,
-    })
+    () => ({ v1: { x: 0, y: 0 }, v2: { x: 1, y: 1 } }),
+    true
   );
 
   return controlPoints;

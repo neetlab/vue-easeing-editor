@@ -1,26 +1,34 @@
 <script setup lang="ts">
+import { watchThrottled } from "@vueuse/core";
+import { ref } from "vue";
+import { createSequence } from "../../../models/bezier-curve";
+import { useControlPoints } from "../context";
 import EditorCircle from "./EditorCircle.vue";
-import { range } from "../../../utils/range";
-import { computed } from "vue";
 
-const props = defineProps<{
-  /** t -> r (0 <= r <= 1) */
-  readonly timingFn: (t: number) => number;
-}>();
+export type EditorTimelapse = {
+  readonly count?: number;
+};
 
-const sequence = computed(() =>
-  [...range(0, 11)].map((x) => x * 0.1).map((t) => props.timingFn(t))
+const props = withDefaults(defineProps<EditorTimelapse>(), { count: 20 });
+const controlPoints = useControlPoints();
+const sequence = ref<number[]>(createSequence(controlPoints, props.count));
+
+watchThrottled(
+  controlPoints,
+  (p) => {
+    sequence.value = createSequence(p, props.count);
+  },
+  { throttle: 1000, leading: true, trailing: false }
 );
-
-console.log(sequence.value);
 </script>
 
 <template>
-  <div class="w-full h-8 bg-slate-200 pr-4">
+  <div class="w-full h-8 pr-4">
     <div class="relative">
       <EditorCircle
         v-for="item in sequence"
         class="absolute top-0"
+        :delay="item"
         :key="item"
         :style="{ left: `${item * 100}%` }"
       />
