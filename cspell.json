@@ -4,8 +4,10 @@
   "dictionaryDefinitions": [],
   "dictionaries": [],
   "words": [
+    "autodocs",
     "rushstack",
-    "tailwindcss"
+    "tailwindcss",
+    "Timelapse"
   ],
   "ignoreWords": [],
   "import": []

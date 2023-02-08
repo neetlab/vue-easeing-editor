@@ -25,6 +25,15 @@ module.exports = {
   ],
   overrides: [
     {
+      files: ["**/*.vue"],
+      rules: {
+        "unicorn/prevent-abbreviations": [
+          "error",
+          { allowList: { props: true } },
+        ],
+      },
+    },
+    {
       files: ["**/*.spec.ts"],
       env: {
         jest: true,
