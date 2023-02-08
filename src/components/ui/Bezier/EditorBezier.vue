@@ -15,6 +15,7 @@ export type EditorBezierProps = {
 
 export type EditorBezierEmits = {
   (event: "move", data: ControlPoints): void;
+  (event: "change", data: ControlPoints): void;
 };
 
 const controlPoints = useControlPoints();
@@ -32,8 +33,8 @@ const isDown = ref(false);
 const overlay = ref<ControlReferences | undefined>();
 
 const moveByMouseEvent = (event: MouseEvent) => {
-  const x = event.offsetX;
-  const y = event.offsetY;
+  const x = event.clientX;
+  const y = event.clientY;
 
   const c1 = overlay.value?.c1.circle?.getBoundingClientRect();
   const c2 = overlay.value?.c2.circle?.getBoundingClientRect();
@@ -44,18 +45,17 @@ const moveByMouseEvent = (event: MouseEvent) => {
   const d1 = Math.hypot(x - c1.x, y - c1.y);
   const d2 = Math.hypot(x - c2.x, y - c2.y);
 
-  if (d1 < d2) {
-    emit("move", {
-      ...controlPoints,
-      v1: fromCoords({ x, y }, props.size),
-    });
-  }
+  // console.log(`距離 C1(${c1.x}, ${c1.y}) C2(${c2.x}, ${c2.y})`);
 
-  if (d2 <= d1) {
-    emit("move", {
-      ...controlPoints,
-      v2: fromCoords({ x, y }, props.size),
-    });
+  const controlPoint = fromCoords(
+    { x: event.offsetX, y: event.offsetY },
+    props.size
+  );
+
+  if (d1 < d2) {
+    emit("move", { v1: controlPoint, v2: controlPoints.v2 });
+  } else {
+    emit("move", { v1: controlPoints.v1, v2: controlPoint });
   }
 };
 
@@ -66,10 +66,12 @@ const handleMouseDown = (event: MouseEvent) => {
 
 const handleMouseUp = (_: MouseEvent) => {
   isDown.value = false;
+  emit("change", controlPoints);
 };
 
 const handleMouseLeave = () => {
   isDown.value = false;
+  emit("change", controlPoints);
 };
 
 const handleMove = (event: MouseEvent) => {

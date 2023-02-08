@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { reactive, watch } from "vue";
+import { reactive } from "vue";
 
 import { ControlPoints } from "../../models/bezier-curve";
 import EditorBezier from "../ui/Bezier/EditorBezier.vue";
@@ -20,10 +20,6 @@ const controlPoints = reactive<ControlPoints>({
   },
 });
 
-watch(controlPoints, (p) => {
-  console.log("updated", p);
-});
-
 const handleMove = (event: ControlPoints) => {
   controlPoints.v1 = event.v1;
   controlPoints.v2 = event.v2;
@@ -41,7 +37,7 @@ provideControlPoints(controlPoints);
 
       <div>
         <EditorBezier
-          :size="200"
+          :size="150"
           :control-points="controlPoints"
           @move="handleMove"
         />
