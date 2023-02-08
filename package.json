@@ -21,6 +21,7 @@
     "vue": "^3.2.45"
   },
   "devDependencies": {
+    "@rushstack/eslint-patch": "^1.2.0",
     "@storybook/addon-essentials": "^7.0.0-beta.44",
     "@storybook/addon-interactions": "^7.0.0-beta.44",
     "@storybook/addon-links": "^7.0.0-beta.44",
@@ -34,10 +35,11 @@
     "@typescript-eslint/parser": ">=5.43.0",
     "@vitejs/plugin-vue": "^4.0.0",
     "@vitest/coverage-c8": "^0.28.4",
+    "@vue/eslint-config-prettier": "^7.0.0",
+    "@vue/eslint-config-typescript": "^11.0.2",
     "eslint": "^8.33.0",
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-import": "^2.27.5",
-    "eslint-plugin-jsx-a11y": "^6.7.1",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-simple-import-sort": "^10.0.0",
     "eslint-plugin-storybook": "^0.6.10",
