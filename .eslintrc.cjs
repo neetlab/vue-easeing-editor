@@ -29,7 +29,7 @@ module.exports = {
       rules: {
         "unicorn/prevent-abbreviations": [
           "error",
-          { allowList: { props: true } },
+          { allowList: { Props: true, props: true } },
         ],
       },
     },
@@ -37,6 +37,15 @@ module.exports = {
       files: ["**/*.spec.ts"],
       env: {
         jest: true,
+      },
+    },
+    {
+      files: ["**/*.stories.ts"],
+      rules: {
+        "unicorn/prevent-abbreviations": [
+          "error",
+          { allowList: { args: true } },
+        ],
       },
     },
     {
