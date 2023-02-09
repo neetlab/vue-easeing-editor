@@ -44,8 +44,6 @@ const moveByMouseEvent = (event: MouseEvent) => {
   const d1 = Math.hypot(x - c1.x, y - c1.y);
   const d2 = Math.hypot(x - c2.x, y - c2.y);
 
-  // console.log(`距離 C1(${c1.x}, ${c1.y}) C2(${c2.x}, ${c2.y})`);
-
   const controlPoint = fromCoords(
     { x: event.offsetX, y: event.offsetY },
     props.size
@@ -64,11 +62,13 @@ const handleMouseDown = (event: MouseEvent) => {
 };
 
 const handleMouseUp = (_: MouseEvent) => {
+  if (!isDown.value) return;
   isDown.value = false;
   emit("moveEnd", controlPoints);
 };
 
 const handleMouseLeave = () => {
+  if (!isDown.value) return;
   isDown.value = false;
   emit("moveEnd", controlPoints);
 };
