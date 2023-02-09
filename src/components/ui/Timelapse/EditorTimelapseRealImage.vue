@@ -1,28 +1,20 @@
 <script setup lang="ts">
 import { useTimeout } from "@vueuse/core";
-import { watch } from "vue";
 
+import { useControlPointsStylesheet } from "../control-points";
 import EditorTimelapseCircle from "./EditorTimelapseCircle.vue";
 
-type EditorTimelapseRealImageProps = {
-  readonly tick: number;
-};
-
-const { start, ready } = useTimeout(1300, { controls: true });
-
-const props = defineProps<EditorTimelapseRealImageProps>();
-
-watch(
-  () => props.tick,
-  () => {
-    start();
-  }
-);
+const ready = useTimeout(1300);
+const animationTimingFunction = useControlPointsStylesheet();
 </script>
 
 <template>
   <Transition name="fade">
-    <EditorTimelapseCircle v-if="!ready" class="slide-fade-enter" />
+    <EditorTimelapseCircle
+      v-if="!ready"
+      class="slide-fade-enter"
+      :style="{ animationTimingFunction }"
+    />
   </Transition>
 </template>
 

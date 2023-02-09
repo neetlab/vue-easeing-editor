@@ -78,7 +78,9 @@ export const fromStylesheet = (stylesheet: string): ControlPoints => {
   };
 };
 
-export const createSequence = (p: ControlPoints, count = 20) => {
+export type Progress = [t: number, value: number];
+
+export const createProgresses = (p: ControlPoints, count = 20): Progress[] => {
   const timingFunction = BezierEasing(
     Math.max(Math.min(p.v1.x, 1), 0),
     Math.max(Math.min(p.v1.y, 1), 0),
@@ -89,6 +91,6 @@ export const createSequence = (p: ControlPoints, count = 20) => {
   const end = count + 1;
 
   return [...range(0, end)]
-    .map((x) => (x * 1) / end)
-    .map((t) => timingFunction(t));
+    .map((x) => x / end)
+    .map((t) => [t, timingFunction(t)]);
 };

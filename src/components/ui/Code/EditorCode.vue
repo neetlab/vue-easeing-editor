@@ -1,11 +1,7 @@
 <script setup lang="ts">
-import { computed } from "vue";
+import { useControlPointsStylesheet } from "../control-points";
 
-import { toStylesheet } from "../../../models/bezier-curve";
-import { useControlPoints } from "../control-points";
-
-const controlPoints = useControlPoints();
-const code = computed(() => toStylesheet(controlPoints));
+const code = useControlPointsStylesheet();
 </script>
 
 <template>

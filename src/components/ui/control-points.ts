@@ -1,6 +1,6 @@
-import { DeepReadonly, inject, provide, readonly } from "vue";
+import { computed, DeepReadonly, inject, provide, readonly, Ref } from "vue";
 
-import { ControlPoints } from "../../models/bezier-curve";
+import { ControlPoints, toStylesheet } from "../../models/bezier-curve";
 
 const symbol = Symbol();
 
@@ -16,4 +16,12 @@ export const useControlPoints = (): DeepReadonly<ControlPoints> => {
   );
 
   return controlPoints;
+};
+
+export const useControlPointsStylesheet = (): DeepReadonly<Ref<string>> => {
+  const controlPoints = useControlPoints();
+  const stylesheet = computed(() => {
+    return toStylesheet(controlPoints);
+  });
+  return stylesheet;
 };
