@@ -31,7 +31,8 @@ const animationTimingFunction = useControlPointsStylesheet();
 .slide-fade-enter {
   position: absolute;
   top: 0;
-  animation: slide-fade-out 1s linear;
+  animation-name: slide-fade-out;
+  animation-duration: 1s;
   animation-fill-mode: forwards;
 }
 

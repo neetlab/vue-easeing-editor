@@ -14,5 +14,8 @@ const opacity = computed(() => (show.value ? "0.1" : "0"));
 </script>
 
 <template>
-  <EditorTimelapseCircle :style="{ opacity }" />
+  <EditorTimelapseCircle
+    class="transition-opacity duration-75"
+    :style="{ opacity }"
+  />
 </template>
