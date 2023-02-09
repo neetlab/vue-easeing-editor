@@ -14,7 +14,7 @@ import EditorPresets from "../ui/Presets/EditorPresets.vue";
 import EditorTimelapse from "../ui/Timelapse/EditorTimelapse.vue";
 
 export type EasingEditorProps = {
-  readonly modelValue: string;
+  readonly modelValue?: string;
 };
 
 export type EasingEditorEmits = {
@@ -53,7 +53,7 @@ provideControlPoints(controlPoints);
 
 <template>
   <div class="bg-white border border-gray-200 shadow rounded p-4 w-[272px]">
-    <EditorTimelapse :tick="tick" />
+    <EditorTimelapse :key="tick" />
 
     <div class="flex gap-7" :style="{ marginTop: '26px' }">
       <EditorPresets :presets="PRESETS" @change="handleChangePreset" />
