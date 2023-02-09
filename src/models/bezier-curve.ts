@@ -49,10 +49,10 @@ export const fromCoords = (coords: Vector, size: number): Vector => {
 
 export const toStylesheet = (controlPoints: ControlPoints) =>
   `cubic-bezier(${[
-    controlPoints.v1.x.toPrecision(2),
-    controlPoints.v1.y.toPrecision(2),
-    controlPoints.v2.x.toPrecision(2),
-    controlPoints.v2.y.toPrecision(2),
+    Number(controlPoints.v1.x.toFixed(2)),
+    Number(controlPoints.v1.y.toFixed(2)),
+    Number(controlPoints.v2.x.toFixed(2)),
+    Number(controlPoints.v2.y.toFixed(2)),
   ].join(", ")})`;
 
 export const fromStylesheet = (stylesheet: string): ControlPoints => {

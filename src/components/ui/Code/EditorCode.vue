@@ -6,7 +6,7 @@ const code = useControlPointsStylesheet();
 
 <template>
   <div class="w-full text-[11px] text-center mt-[43px] mb-[3px]">
-    <code>
+    <code class="whitespace-nowrap">
       {{ code }}
     </code>
   </div>
