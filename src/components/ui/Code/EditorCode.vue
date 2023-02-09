@@ -5,8 +5,8 @@ const code = useControlPointsStylesheet();
 </script>
 
 <template>
-  <div class="w-full text-center mt-[35px]">
-    <code class="text-[11px]">
+  <div class="w-full text-[11px] text-center mt-[43px] mb-[3px]">
+    <code>
       {{ code }}
     </code>
   </div>

@@ -52,7 +52,7 @@ provideControlPoints(controlPoints);
 </script>
 
 <template>
-  <div class="bg-white w-min border border-gray-200 shadow rounded p-4">
+  <div class="bg-white border border-gray-200 shadow rounded p-4 w-[272px]">
     <EditorTimelapse :tick="tick" />
 
     <div class="flex gap-7" :style="{ marginTop: '26px' }">
