@@ -4,9 +4,12 @@ import EditorTimelapse from "./EditorTimelapse.vue";
 
 export default {
   component: EditorTimelapse,
-  render: () => ({
+  render: (args) => ({
     components: { EditorTimelapse },
-    template: "<editor-timelapse />",
+    setup: () => {
+      return args;
+    },
+    template: '<editor-timelapse v-bind="args" />',
   }),
 } satisfies Meta<typeof EditorTimelapse>;
 

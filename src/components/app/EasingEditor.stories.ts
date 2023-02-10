@@ -6,8 +6,10 @@ export default {
   component: EasingEditor,
   render: (args) => ({
     components: { EasingEditor },
-    setup: () => ({ args }),
-    template: `<easing-editor />`,
+    setup: () => {
+      return args;
+    },
+    template: `<easing-editor v-bind="args" />`,
   }),
 } satisfies Meta<typeof EasingEditor>;
 

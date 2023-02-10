@@ -6,12 +6,13 @@ import EditorCode from "./EditorCode.vue";
 
 export default {
   component: EditorCode,
-  render: () => ({
+  render: (args) => ({
     components: { EditorCode },
     setup: () => {
       provideControlPoints(PRESETS[0].value);
+      return args;
     },
-    template: `<editor-code />`,
+    template: `<editor-code v-bind="args" />`,
   }),
 } satisfies Meta<typeof EditorCode>;
 
