@@ -9,13 +9,11 @@ const animationTimingFunction = useControlPointsStylesheet();
 </script>
 
 <template>
-  <Transition name="fade">
-    <EditorTimelapseCircle
-      v-if="!ready"
-      class="slide-fade-enter"
-      :style="{ animationTimingFunction }"
-    />
-  </Transition>
+  <EditorTimelapseCircle
+    v-if="!ready"
+    class="slide-fade-enter"
+    :style="{ animationTimingFunction }"
+  />
 </template>
 
 <style scoped>
@@ -34,14 +32,5 @@ const animationTimingFunction = useControlPointsStylesheet();
   animation-name: slide-fade-out;
   animation-duration: 1s;
   animation-fill-mode: forwards;
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s;
-}
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
 }
 </style>
